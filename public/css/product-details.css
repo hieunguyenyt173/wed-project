@@ -16,7 +16,9 @@
     cursor: pointer;
     background-color: #ddd;
 }
-
+ul {
+    list-style: disc;
+}
 .product-sale {
     opacity: 0.7;
 }
