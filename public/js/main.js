@@ -145,13 +145,15 @@ const timeCountdown = function(){
   seconds.innerHTML = s < 10 ? "0" + s : s;
 }
 setInterval(timeCountdown, 1000);
-
+const url = "http://localhost:3000/products";
 const productListEl = document.querySelector("#sale .list-item");
 // API lấy danh sách todo
  function getProductsAPI() {
   return axios.get("http://localhost:3000/products");
 }
-
+fetch(url)
+  .then((response) => response.json())
+  .then((data) => console.log(data));
 // Khai báo biến
 let products = [];
 
@@ -161,7 +163,7 @@ async function getProducts() {
         const res = await getProductsAPI();
         products = res.data;
         // Render ra ngoài giao diện
-        renderProduct(JSON.parse(products));
+        renderProduct(products);
     } catch (error) {
         console.log(error);
     }
