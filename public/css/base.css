@@ -397,7 +397,16 @@ button {
 .btn-pay:hover {
     opacity: 0.8;
 }
+.item {
+    transition: all 0.3s;
+    margin-right: 10px;
+    cursor: pointer;
+    overflow: hidden;
 
+}
+.item:hover {
+    transform: scale(1.025);
+}
 .btn-continue:hover {
     opacity: 0.8;
 }
@@ -481,6 +490,9 @@ button {
 }
 
 @media (max-width: 768px) {
+    .btn-view {
+        display: none !important;
+    }
     /* Header */
     .hide {
         display: none;

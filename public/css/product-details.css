@@ -17,7 +17,7 @@
     background-color: #ddd;
 }
 ul {
-    list-style: disc;
+    list-style: none;
 }
 .product-sale {
     opacity: 0.7;

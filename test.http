@@ -1,0 +1,33 @@
+GET http://localhost:3000/products/1 HTTP/1.1
+###
+GET http://localhost:3000/products?gender=women HTTP/1.1
+###
+GET http://localhost:3000/products?salestatus=true HTTP/1.1
+###
+GET http://localhost:3000/products?categories=bestseller HTTP/1.1
+###
+GET http://localhost:3000/products?categories=GiftSet HTTP/1.1
+###
+POST http://localhost:3000/products HTTP/1.1
+Content-Type: application/json
+{
+    "id": 13,
+     "gender":"men",
+     "categories": "GiftSet",
+      "imageproduct": ["https://marvel-b1-cdn.bc0a.com/f00000000246772/cdn.shopify.com/s/files/1/0269/7763/2389/products/M-GS-3240larger_1024x1024.jpg?v=1623934261"
+            
+            ],
+    "brandname":"ALFRED DUNHILL",
+     "name": "Desire by Alfred Dunhill for Men - 3 Pc Gift Set",
+    "status": true,
+    "likestatus": false,
+    "price": 745000,
+    "price_sale": 650000,
+    "salestatus" : true,
+    "desc": "Ra mắt bởi nhà thiết kế Alfred Dunhill. Hương thơm gỗ này có sự pha trộn của hương hổ phách, gỗ đàn hương và opoponax. Nó được khuyến khích cho mặc giản dị. Desire by Alfred Dunhill for Men - Bộ Quà Tặng 3 Pc Xịt EDT 3,4oz, Xịt EDT 1oz, Xịt toàn thân 6,6oz",
+    "rate": 4.8,
+    "size": ["50ml"]  
+}
+
+###
+GET http://localhost:3000/products/?id=1&id=2&id=3&id=4&id=5&id=6 HTTP/1.1

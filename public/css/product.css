@@ -159,6 +159,9 @@
 }
 
 @media (min-width:768px) and (max-width:992px) {
+    .product-price{
+        font-size: 10px !important;
+    }
     .row {
         --bs-gutter-x:1rem
     }
