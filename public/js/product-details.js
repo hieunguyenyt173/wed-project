@@ -1,3 +1,6 @@
+let params = new URLSearchParams(window.location.search);
+let id = params.get("id");
+
 // Initialise Carousel ********************************
 const mainCarousel = new Carousel(document.querySelector("#mainCarousel"), {
     Dots: false,

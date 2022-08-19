@@ -161,7 +161,7 @@ async function getProducts() {
         const res = await getProductsAPI();
         products = res.data;
         // Render ra ngoài giao diện
-        renderProduct(products);
+        renderProduct(JSON.parse(products));
     } catch (error) {
         console.log(error);
     }
@@ -184,7 +184,7 @@ const renderProduct = arr => {
           <div class="row">
             <div class="col-sm-12">
               <div class="image-product">
-                <img src="${p.image-product}" alt="anh san pham">
+                <img src="${p.image-product[0]}" alt="anh san pham">
                 <div class="btn-view mx-auto d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#quickview-modal">
                   <p class="my-0">Xem nhanh</p>
                 </div>
@@ -200,7 +200,7 @@ const renderProduct = arr => {
           </div>
           <div class="row">
             <div class="col">
-              <a href="./product-details.html"><div class="product-info">
+              <a href="./product-details.htm?id=${p.id}"><div class="product-info">
                 <p class="product-brand">${p.product-name}</p>
                 <p class="product-name">${p.name}</p>
                 <div class="product-price d-flex justify-content-between">
