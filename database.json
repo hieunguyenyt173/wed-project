@@ -28,7 +28,7 @@
       "likestatus": false,
       "price": 520000,
       "price_sale": 390000,
-      "salestatus": false,
+      "salestatus": true,
       "desc": "Nước hoa BURBERRY BRIT được nhà thiết kế BURBERRY giới thiệu vào năm 2003, thể hiện tinh thần cá tính vui tươi của người Anh. Người đẹp Brit mặc hở bạo nhưng luôn quyến rũ và gợi cảm khó lường. Tươi mát và vui tươi, Burberry Brit dành cho phụ nữ là sự pha trộn cổ điển, xanh mát của phương Đông giữa chanh Ý, lê Icy, hoa mẫu đơn trắng và các tinh chất hạt ngọt ngào như Green Almond và Sugared Almonds, với hổ phách nhẹ nhàng, vani và đậu Tonka. Kem dưỡng thể Burberry Brit được thoa cùng với nước hoa sẽ tạo ra một trải nghiệm hương thơm sâu sắc hơn trên toàn bộ cơ thể. Các loại nước hoa khác của Burberry là Burberry Touch và Weekend Burberry.",
       "rate": 4.8,
       "size": [
@@ -77,8 +77,8 @@
       "status": true,
       "likestatus": false,
       "price": 450000,
-      "price_sale": 450000,
-      "salestatus": false,
+      "price_sale": 378000,
+      "salestatus": true,
       "desc": "CK Eternity Aqua là sản phẩm eau de toilette dành cho nam của Calvin Klein. Đây là một hương thơm nam tính tươi mát với các nốt hương thủy sinh và xanh lá, rất thích hợp cho một ngày nắng ấm. Nó có hương cam quýt tươi mát với tông màu gỗ ấm áp và một chút hương trái cây mát lạnh.",
       "rate": 4.9,
       "size": [
@@ -127,8 +127,8 @@
       "status": true,
       "likestatus": false,
       "price": 480000,
-      "price_sale": 480000,
-      "salestatus": false,
+      "price_sale": 395000,
+      "salestatus": true,
       "desc": "Được ra mắt vào năm 1997 bởi nhà Burberry, Weekend for Women mang phong cách giản dị, mát mẻ và vui tươi _ chỉ là mùi hương mà bạn muốn tỏa ra trong những ngày cuối tuần vui vẻ. Các nốt hương ngọt ngào và hấp dẫn, trong khi vẫn sang trọng. Chúng hòa quyện với nhau một cách hoàn hảo để tỏa ra một mùi hương gợi lên ý tưởng về sự tự do, hạnh phúc và niềm vui trọn vẹn.",
       "rate": 4.7,
       "size": [
@@ -152,8 +152,8 @@
       "status": true,
       "likestatus": false,
       "price": 550000,
-      "price_sale": 550000,
-      "salestatus": false,
+      "price_sale": 480000,
+      "salestatus": true,
       "desc": "Nước hoa Burberry Touch được Burberry cho ra mắt vào năm 2000 và được mô tả như một phương Đông rực rỡ. Một hương thơm nữ tính mạnh mẽ gợi cảm giác thoải mái và thân mật. Hương thơm của nước hoa Burberry Touch là nho đen, quả mâm xôi, hạt tiêu hồng, cam, tinh dầu hoa hồng, hoa huệ, hoa nhài, Madonna Lilly, đào, mâm xôi, vani và gỗ tuyết tùng. Burberry Touch được khuyến khích sử dụng bình thường.",
       "rate": 4.7,
       "size": [
