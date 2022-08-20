@@ -13,8 +13,8 @@ function start() {
   getProductsGift(function(products2) {
     renderProductGift(products2);
   });
-  getProductsRandom(function (products) {
-    renderProductRandom(products);
+  getProductsRandom(function (products3) {
+    renderProductRandom(products3);
   });
 }
 start();
