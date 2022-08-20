@@ -1,7 +1,7 @@
-const productsApiSale = "http://localhost:3000/products?salestatus=true";
-const productsApiBestseller = "http://localhost:3000/products?categories=bestseller";
-const productsApiGift= "http://localhost:3000/products?categories=bestseller";
-const productsApiRandom= "http://localhost:3000/products/?id=1&id=2&id=3&id=4";
+const productsApiSale = "/products?salestatus=true";
+const productsApiBestseller = "/products?categories=bestseller";
+const productsApiGift= "/products?categories=bestseller";
+const productsApiRandom= "/products/?id=1&id=2&id=3&id=4";
 
 function start() {
   getProducts(function (products) {
