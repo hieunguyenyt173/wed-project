@@ -52,6 +52,9 @@ img {
 .main-menu {
     background-color: var(--red);
 }
+.menu-active {
+    background-color: orange;
+}
 .brand-name:hover {
     color: var(--red);
 }
