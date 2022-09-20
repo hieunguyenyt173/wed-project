@@ -1,254 +1,117 @@
-const productsApiSale = "/products?salestatus=true";
-const productsApiBestseller = "/products?categories=bestseller";
-const productsApiGift= "/products?categories=bestseller";
-const productsApiRandom= "/products/?id=1&id=2&id=3&id=4";
+const listProductSale = "/products?salestatus=true";
+const listItemEl = document.querySelector(".list-item");
+const listBestsellerEl = document.querySelector(".list-bestseller");
+const listGifftEl =  document.querySelector(".listgift");
+const settingSlick = {
+  arrows: false,
+  dots: true,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 5,
+  slidesToScroll: 5,
+  responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 450,
+      settings: {
+        dots: false,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    
+  ]
+};
 
-function start() {
-  getProducts(function (products) {
-    renderProduct(products);
-  });
-  getProductsSeller(function(products1) {
-    renderProductSeller(products1);
-  });
-  getProductsGift(function(products2) {
-    renderProductGift(products2);
-  });
-  getProductsRandom(function (products3) {
-    renderProductRandom(products3);
-  });
+function productsApiSale(api) {
+  return axios.get(api)
 }
-start();
-// Lấy danh sách 
-function getProducts(callback) {
-  fetch(productsApiSale)
-    .then((response) => response.json())
-    .then(callback);
-  
-}
-function getProductsSeller(callback) {
-  fetch(productsApiBestseller)
-    .then((response) => response.json())
-    .then(callback);
 
-}
-function getProductsGift(callback) {
-  fetch(productsApiGift)
-    .then((response) => response.json())
-    .then(callback);
-
-}
-function getProductsRandom(callback) {
-  fetch(productsApiRandom)
-    .then((response) => response.json())
-    .then(callback);
-
-}
-
-
-let html = "";
-function renderProduct(products) {
-  const productListEl = document.querySelector("#sale .list-product");
-  productListEl.innerHTML="";
-  if (products.length == 0) {
-    productListEl.innerHTML = "Không có sản phẩm nào"
+let listProduct = [];
+async function getProductSale() {
+  try {
+    const res = await productsApiSale(listProductSale);
+     listProduct = res.data;
+     let listBestseller = listProduct.filter(p => p.categories == "bestseller")
+     let listGift = listProduct.filter(p => p.categories == "GiftSet")
+     renderProducts(listProduct, listItemEl, ".list-item");
+     renderProducts(listBestseller, listBestsellerEl,".list-bestseller");
+     renderProducts(listGift, listGifftEl, ".listgift");
+  } catch (error) {
+    console.log(error);
   }
-  let html = products.map(function(product) {
-    return `<div class="col-md-4 col-sm-6 col-lg-3 col-6">
-    <div class="item shadow p-3 mb-2 bg-body rounded">
-      <div class="row">
-        <div class="col">
-          <div class="image-product">
-            <img src="${product.imageproduct}" alt="anh san pham">
-            <div class="btn-view mx-auto d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#quickview-modal">
-              <p class="my-0">Xem nhanh</p>
-            </div>
-            <div class="saleoff d-flex align-item-center text-white text-center">
-              <p class="">Sale ${Math.floor(((product.price - product.price_sale)/product.price) *100)}%</p>
-            </div>
-            <div class="like">
-              <span class="like-icon fs-4"><i class="fa-solid fa-heart"></i></span>
-            </div>
+}
+function renderProducts(arr,list,listUi) {
+  list.innerHTML= "";
+ let html = "";
+  arr.forEach(p => {
+    html += `
+    <div class="item shadow mb-3 bg-body rounded mx-2">
+    <div class="row">
+      <div class="col">
+        <div class="image-product">
+          <img src="${p.imageproduct}" alt="anh san pham">
+          <div class="btn-view mx-auto d-flex justify-content-center align-items-center" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quickview-modal">
+            <p class="my-0">Mua ngay</p>
           </div>
-
+          <div class="saleoff d-flex align-item-center text-white text-center">
+            <p class="">Sale 45%</p>
+          </div>
+          <div class="like">
+            <span class="like-icon fs-4"><i class="fa-solid fa-heart"></i></span>
+          </div>
         </div>
+
       </div>
-      <div class="row">
-        <div class="col">
-        <a href="./product-details.html">
-        <div class="product-info">
-            <p class="product-brand">${product.brandname}</p>
-            <p class="product-name">${product.name}</p>
-            <div class="product-price">
-              <p class="price-sale mb-2">${formatMoney(product.price_sale)}</p>
-              <p class="price text-decoration-line-through m-0">${formatMoney(product.price)}</p>
-            </div>
-          </div>
-        </a>
+    </div>
+    <div class="row">
+    <a href="./product-details.html?id=${p.id}">
+    <div class="col">
+      <div class="product-info d-flex flex-column justify-content-between">
+        <p class="product-brand mb-1">${p.brandname}</p>
+        <p class="product-name mb-1">${p.name}</p>
+        <div class="product-price d-flex justify-content-between">
+          <p class="price-sale">${formatMoney(p.price_sale)}</p>
+          <p class="price text-decoration-line-through">${formatMoney(p.price)}</p>
         </div>
       </div>
     </div>
-  </div>`;
-  })
-  productListEl.innerHTML = html.join('');
-  
-}
-
-// Lấy danh sách 
-function getProducts(callback) {
-  fetch(productsApiSale)
-    .then((response) => response.json())
-    .then(callback);
-  
-}
-function getProductsSeller(callback) {
-  fetch(productsApiBestseller)
-    .then((response) => response.json())
-    .then(callback);
-
-}
-
-
-let html1 = "";
-function renderProductSeller(products) {
-  const productListEl1 = document.querySelector("#best-seller .list-product-seller");
-  productListEl1.innerHTML="";
-  if (products.length == 0) {
-    productListEl1.innerHTML = "Không có sản phẩm nào"
-  }
-  let html1 = products.map(function(product) {
-    return `<div class="col-md-4 col-sm-6 col-lg-3 col-6">
-    <div class="item shadow p-3 mb-2 bg-body rounded">
-      <div class="row">
-        <div class="col">
-          <div class="image-product">
-            <img src="${product.imageproduct}" alt="anh san pham">
-            <div class="btn-view mx-auto d-flex justify-content-center align-items-center">
-              <p class="my-0">Xem nhanh</p>
-            </div>
-            <div class="saleoff d-flex align-item-center text-white text-center">
-              <p class="">Sale ${Math.floor(((product.price - product.price_sale)/product.price) *100)}%</p>
-            </div>
-            <div class="like">
-              <span class="like-icon fs-4"><i class="fa-solid fa-heart"></i></span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-        <a href="./product-details.html">
-        <div class="product-info">
-            <p class="product-brand">${product.brandname}</p>
-            <p class="product-name">${product.name}</p>
-            <div class="product-price">
-              <p class="price-sale mb-2">${formatMoney(product.price_sale)}</p>
-              <p class="price text-decoration-line-through m-0">${formatMoney(product.price)}</p>
-            </div>
-          </div>
-        </a>
-        </div>
-      </div>
+  </a>
     </div>
-  </div>`;
+  </div>
+  `
   })
-  productListEl1.innerHTML = html1.join('');
+  list.innerHTML = html;
+  $(listUi).slick(settingSlick);
   
 }
-let html2 = "";
-function renderProductGift(products2) {
-  const productListEl2 = document.querySelector(".list-product-gift");
-  productListEl2.innerHTML="";
-  if (products2.length == 0) {
-    productListEl2.innerHTML = "Không có sản phẩm nào"
-  }
-  let html1 = products2.map(function(product) {
-    return `<div class="col-md-4 col-sm-6 col-lg-3 col-6">
-    <div class="item shadow p-3 mb-2 bg-body rounded">
-      <div class="row">
-        <div class="col">
-          <div class="image-product">
-            <img src="${product.imageproduct}" alt="anh san pham">
-            <div class="btn-view mx-auto d-flex justify-content-center align-items-center">
-              <p class="my-0">Xem nhanh</p>
-            </div>
-            <div class="saleoff d-flex align-item-center text-white text-center">
-              <p class="">Sale ${Math.floor(((product.price - product.price_sale)/product.price) *100)}%</p>
-            </div>
-            <div class="like">
-              <span class="like-icon fs-4"><i class="fa-solid fa-heart"></i></span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-        <a href="./product-details.html">
-        <div class="product-info">
-            <p class="product-brand">${product.brandname}</p>
-            <p class="product-name">${product.name}</p>
-            <div class="product-price">
-              <p class="price-sale mb-2">${formatMoney(product.price_sale)}</p>
-              <p class="price text-decoration-line-through m-0">${formatMoney(product.price)}</p>
-            </div>
-          </div>
-        </a>
-        </div>
-      </div>
-    </div>
-  </div>`;
-  })
-  productListEl2.innerHTML = html1.join('');
+ 
+const renderQuickview = (id) => {
   
 }
-function renderProductRandom(products3) {
-  const productListEl3 = document.querySelector(".list-product-user");
-  productListEl3.innerHTML="";
-  if (products3.length == 0) {
-    productListEl3.innerHTML = "Không có sản phẩm nào"
-  }
-  let html1 = products3.map(function(product) {
-    return `<div class="col-md-6 col-sm-6">
-    <div class="item shadow p-3 mb-2 bg-body rounded me-0">
-      <div class="row">
-        <div class="col">
-          <div class="image-product">
-            <img src="${product.imageproduct}" alt="anh san pham">
-            <div class="btn-view mx-auto d-flex justify-content-center align-items-center">
-              <p class="my-0">Xem nhanh</p>
-            </div>
-            <div class="saleoff d-flex align-item-center text-white text-center">
-              <p class="">Sale ${Math.floor(((product.price - product.price_sale)/product.price) *100)}%</p>
-            </div>
-            <div class="like">
-              <span class="like-icon fs-4"><i class="fa-solid fa-heart"></i></span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-        <a href="./product-details.html">
-        <div class="product-info">
-            <p class="product-brand">${product.brandname}</p>
-            <p class="product-name">${product.name}</p>
-            <div class="product-price">
-              <p class="price-sale mb-2">${formatMoney(product.price_sale)}</p>
-              <p class="price text-decoration-line-through m-0">${formatMoney(product.price)}</p>
-            </div>
-          </div>
-        </a>
-          
-        </div>
-      </div>
-    </div>
-  </div>`;
-  })
-  productListEl3.innerHTML = html1.join('');
-  
-}
+getProductSale()
 // Format tiền
 const formatMoney = number =>{
   return  number.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
@@ -350,34 +213,61 @@ Fancybox.bind('[data-fancybox="gallery"]', {
 });
 // Slider brand
 $(document).ready(function(){
-  $(".owl-carousel").owlCarousel();
-});
-var owl = $(".owl-carousel");
-owl.owlCarousel({
-  responsiveClass: true,
-  responsive: {
-    0: {
-      items: 2,
-
-    },
-    576: {
-      items: 3,
-
-    },
-    992: {
-      items: 5,
-
-
-    }
-  },
-  // loop: true,
-  margin: 10,
+  $('.list-brands').slick({
+  arrows: false,
+  dots: false,
+  infinite: true,
   autoplay: true,
-  autoplayTimeout: 3000,
-  autoplayHoverPause: true,
-  nav: false,
+  autoplaySpeed: 2000,
+  speed: 200,
+  slidesToShow: 5,
+  slidesToScroll: 5,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 5,
+        slidesToScroll: 5,
+       
+      }
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    },
+    {
+      breakpoint: 576,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    }
+    
+  ]
+  });
+  $(document).ready(function(){
+    $('.list-banner').slick({
+      dots: false,
+      arrows: false,
+      infinite: true,
+      speed: 500,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      fade: true,
+      cssEase: 'linear'
+    });
+  });
 });
-
 
 
 // Countdown clock
@@ -385,7 +275,7 @@ const hours = document.getElementById("hours")
 const minutes = document.getElementById("minutes")
 const seconds = document.getElementById("seconds")
 const nowYear = new Date().getFullYear();
-const saleTime = new Date("August 21 2022 00:00:00");
+const saleTime = new Date("September 31 2022 00:00:00");
 const timeCountdown = function () {
   const nowTime = new Date();
   const diff = saleTime - nowTime;
@@ -398,30 +288,7 @@ const timeCountdown = function () {
 }
 setInterval(timeCountdown, 1000);
 
-function scrolll() {
-  let left = document.querySelector(".list-product");
-  left.scrollBy(350, 0)
-}
-function scrollr() {
-  let right = document.querySelector(".list-product");
-  right.scrollBy(-350, 0)
-}
-function scrolll1() {
-  let left = document.querySelector(".list-product-seller");
-  left.scrollBy(350, 0)
-}
-function scrollr1() {
-  let right = document.querySelector(".list-product-seller");
-  right.scrollBy(-350, 0)
-}
-function scrolll2() {
-  let left = document.querySelector(".list-product-gift");
-  left.scrollBy(350, 0)
-}
-function scrollr2() {
-  let right = document.querySelector(".list-product-gift");
-  right.scrollBy(-350, 0)
-}
+
 
 
 
