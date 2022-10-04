@@ -74,7 +74,7 @@ function renderProducts(arr,list,listUi) {
         <div class="image-product">
           <img src="${p.imageproduct}" alt="anh san pham">
           <div class="btn-view mx-auto d-flex justify-content-center align-items-center" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quickview-modal">
-            <p class="my-0">Mua ngay</p>
+            <p class="my-0">Xem nhanh</p>
           </div>
           <div class="saleoff d-flex align-item-center text-white text-center">
             <p class="">Sale 45%</p>
